@@ -16,6 +16,8 @@ app.use(express.json());
 
 app.use(express.json());
 
+app.use("/uploads", express.static("uploads"));
+
 app.use("/", profileRoutes);
 
 const PORT = process.env.PORT || 5000;
