@@ -1,0 +1,36 @@
+{
+  "name": "gidy-profile-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sooriya-V-N/GIDY-PROFILE-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sooriya-V-N/GIDY-PROFILE-API/issues"
+  },
+  "homepage": "https://github.com/Sooriya-V-N/GIDY-PROFILE-API#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "moment-timezone": "^0.6.0",
+    "mongoose": "^9.2.1",
+    "multer": "^2.0.2",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
