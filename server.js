@@ -12,7 +12,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "https://gidy-profile.vercel.app/",
+  origin: "https://gidy-profile.vercel.app",
   credentials: true
 }));
 
