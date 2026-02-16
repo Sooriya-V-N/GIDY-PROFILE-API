@@ -1,28 +1,55 @@
 import mongoose from "mongoose";
 
-const socialLinksSchema = new mongoose.Schema({
-  linkedin: { type: String, default: "" },
-  github: { type: String, default: "" },
-  twitter: { type: String, default: "" },
-  website: { type: String, default: "" },
+const experienceSchema = new mongoose.Schema({
+  role: String,
+  company: String,
+  location: String,
+  startDate: String,
+  endDate: String,
+  description: String,
 });
 
-const skillSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  endorsements: { type: Number, default: 0 },
+const educationSchema = new mongoose.Schema({
+  degree: String,
+  institution: String,
+  startYear: String,
+  endYear: String,
 });
 
 const profileSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    bio: { type: String, required: true },
-    profileImage: { type: String, required: true },
-    socialLinks: socialLinksSchema,
-    skills: [skillSchema],
+    headline: String,
+    bio: String,
+    location: String,
+    email: String,
+    phone: String,
+
+    careerVision: String,
+    growthStatus: String,
+    growthSpace: String,
+    inspiredBy: String,
+
+    profileImage: { type: String, default: "" },
+
+    socialLinks: {
+      linkedin: String,
+      github: String,
+      twitter: String,
+      website: String,
+    },
+
+    skills: [
+      {
+        name: String,
+        endorsements: { type: Number, default: 0 },
+      },
+    ],
+
+    experience: [experienceSchema],
+    education: [educationSchema],
   },
   { timestamps: true }
 );
 
-const Profile = mongoose.model("Profile", profileSchema);
-
-export default Profile;
+export default mongoose.model("Profile", profileSchema);

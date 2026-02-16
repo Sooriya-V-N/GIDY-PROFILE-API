@@ -1,15 +1,23 @@
 import Profile from "../models/profileModel.js";
 
-/**
- * GET /myprofile
- */
+// GET PROFILE
 export const getProfile = async (req, res) => {
   try {
     const profile = await Profile.findOne();
+    res.json(profile);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-    if (!profile) {
-      return res.status(404).json({ message: "Profile not found" });
-    }
+// UPDATE FULL PROFILE (except image)
+export const updateProfile = async (req, res) => {
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      {},
+      req.body,
+      { new: true, upsert: true }
+    );
 
     res.json(profile);
   } catch (error) {
@@ -17,26 +25,21 @@ export const getProfile = async (req, res) => {
   }
 };
 
-/**
- * PUT /myprofile
- */
-export const updateProfile = async (req, res) => {
+// UPDATE PROFILE IMAGE (Separate API)
+export const updateProfileImage = async (req, res) => {
   try {
-    const profile = await Profile.findOne();
+    const imagePath = req.file.path.replace(/\\/g, "/");
 
-    if (!profile) {
-      return res.status(404).json({ message: "Profile not found" });
-    }
+    const profile = await Profile.findOneAndUpdate(
+      {},
+      { profileImage: imagePath },
+      { new: true, upsert: true }
+    );
 
-    profile.name = req.body.name;
-    profile.bio = req.body.bio;
-    profile.profileImage = req.body.profileImage;
-    profile.socialLinks = req.body.socialLinks;
-    profile.skills = req.body.skills;
-
-    const updatedProfile = await profile.save();
-
-    res.json(updatedProfile);
+    res.json({
+      message: "Profile image updated",
+      profile,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
